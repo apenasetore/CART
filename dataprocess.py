@@ -32,6 +32,7 @@ def data_txt_to_matrix():
 def split_train_smples(m):
     train_data = []
     test_data = []
+    res_train_data =[]
     n = []
     
     for i in range(0,800):
@@ -43,6 +44,9 @@ def split_train_smples(m):
             test_data.append(line)    
         else:
             train_data.append(line)
+    
+    for i in train_data:
+            res_train_data.append(i[7])
         
 
-    return (train_data, test_data)
+    return (train_data,res_train_data,test_data)

@@ -14,6 +14,6 @@ import graphviz
 
 
 m = dataprocess.data_txt_to_matrix()
-ts = dataprocess.split_train_smples(m)
-print(len(ts[0]))
-print(len(ts[1]))
+(train_data, res_train_data,test_data) = dataprocess.split_train_smples(m)
+print(len(res_train_data))
+
