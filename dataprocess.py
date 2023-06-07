@@ -11,7 +11,6 @@ import plotly.express as px
 import plotly.graph_objects as go
 import graphviz
 
-
 def data_txt_to_matrix():
 
     f=open("treinoSV.txt", "r")
@@ -29,10 +28,14 @@ def data_txt_to_matrix():
         m.append(lp)
     return m
 
-def split_train_smples(m):
+def generate_data(m):
+
+    classes = ["critico", "instavel", "potencialmente estavel", "estavel"]
+
     train_data = []
-    test_data = []
     res_train_data =[]
+    test_data = []
+    res_test_data = []
     n = []
     
     for i in range(0,800):
@@ -41,12 +44,14 @@ def split_train_smples(m):
     corte = random.sample(n,k = 160)
     for line in m:
         if int(line[0]) in corte:
-            test_data.append(line)    
+            test_data.append(line[3:6])
+            #res_test_data.append(int(line[7]))
+            res_test_data.append(classes[int(line[7])-1])
         else:
-            train_data.append(line)
-    
-    for i in train_data:
-            res_train_data.append(i[7])
+            train_data.append(line[3:6])
+            #res_train_data.append(int(line[7]))
+            res_train_data.append(classes[int(line[7])-1])
         
 
-    return (train_data,res_train_data,test_data)
+    return (train_data, res_train_data, 
+            test_data,  res_test_data)
